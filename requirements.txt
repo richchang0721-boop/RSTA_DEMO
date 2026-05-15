@@ -1,0 +1,7 @@
+# RSTA V1 Adapter — Requirements
+# V1 has no external ML dependencies (predefined outputs demo).
+# Standard library only.
+
+# Optional: for future visualization extensions
+# matplotlib>=3.7.0
+# plotly>=5.18.0
