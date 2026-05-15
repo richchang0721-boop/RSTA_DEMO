@@ -213,7 +213,7 @@ def run_demo():
         print(f"    {dim:<24} {bar(val)} {val:.3f}")
     print()
     print(col(C.BOLD + C.CYAN,
-        "  RSTA Paper (SSRN): https://ssrn.com/abstract=5266805"))
+        "  RSTA Paper (SSRN): Submitted — link coming soon"))
     print(col(C.BOLD + C.CYAN,
         "  GitHub:            https://github.com/richchang0721-boop/RSTA_DEMO"))
     print()
