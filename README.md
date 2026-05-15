@@ -24,7 +24,7 @@ Modern Transformer architectures are powerful at modeling **token relationships*
 ## Paper
 
 **Recursive State Transition Architecture (RSTA): Toward Semantically Stateful Language Generation**  
-Published on SSRN: [https://ssrn.com/abstract=5266805](https://ssrn.com/abstract=5266805)
+Submitted to SSRN — currently under review. Link will be added upon publication.
 
 ---
 
@@ -137,5 +137,5 @@ Apache 2.0 — see [LICENSE](LICENSE)
 ## Author
 
 Rich Chang  
-SSRN: [https://ssrn.com/abstract=5266805](https://ssrn.com/abstract=5266805)  
+SSRN: Submitted — link will be updated upon publication  
 GitHub: [richchang0721-boop](https://github.com/richchang0721-boop)
