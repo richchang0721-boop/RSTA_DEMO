@@ -315,8 +315,10 @@ def run_scenario(key: str):
     print()
     divider()
 
-    state, mapper, coupling, detector, gate = make_pipeline()
-    dims = DEFAULT_DIMENSIONS
+    state, _, _, detector, gate = make_pipeline()
+    # mapper and coupling are initialized in make_pipeline() but not used in V1.5.
+    # State updates here are driven by predefined semantic deltas (state_hint),
+    # not live phrase parsing. Live parsing is introduced in V2.
 
     for i, (user_input, t_out, r_out, hint) in enumerate(s["turns"]):
         t = i + 1
@@ -327,7 +329,8 @@ def run_scenario(key: str):
         print(f"  {user_input}")
         print()
 
-        # Apply state hint (predefined delta for V1.5)
+        # V1.5 uses predefined semantic deltas to visualize RSTA trajectory logic.
+        # It is not yet a live semantic parser — that arrives in V2.
         new_dims = dict(state.dimensions)
         for dim, delta in hint.items():
             new_dims[dim] = max(0.0, min(1.0, new_dims.get(dim, 0.0) + delta))
@@ -360,7 +363,7 @@ def run_scenario(key: str):
         print()
 
         # Side-by-side comparison
-        col_w = 28
+        col_w = 40
 
         print(
             col(C.RED + C.BOLD,   f"  {'Normal Transformer':<{col_w}}") +
