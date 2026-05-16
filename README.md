@@ -32,7 +32,8 @@ Submitted to SSRN — currently under review. Link will be added upon publicatio
 
 ```
 RSTA_DEMO/
-├── demo.py                  ← Main entry point (V1: predefined outputs)
+├── demo.py                  ← V1: pipeline walkthrough (predefined outputs)
+├── demo_v15.py              ← V1.5: interactive before/after comparison
 ├── requirements.txt
 ├── README.md
 └── v1_adapter/
@@ -49,57 +50,66 @@ RSTA_DEMO/
 
 | Version | Description | Model |
 |---------|-------------|-------|
-| **V1 Adapter** | Predefined outputs. Demonstrates pipeline logic and trajectory detection. | None required |
+| **V1 Adapter** | Pipeline walkthrough. Demonstrates trajectory detection on a single drift scenario. | None required |
+| **V1.5 Adapter** | Interactive before/after comparison across 4 failure modes. | None required |
 | V2 Residual *(coming)* | Live model via API key. Logits steering integrated. | Llama / Mistral / Qwen |
 | V3 DualStream *(coming)* | Full dual-stream tokenizer architecture. | Custom training required |
 
 ---
 
-## Quick Start (V1)
+## Quick Start
 
 No dependencies beyond Python 3.10+.
 
 ```bash
 git clone https://github.com/richchang0721-boop/RSTA_DEMO.git
 cd RSTA_DEMO
+```
+
+**V1 — Pipeline walkthrough** (single drift scenario, linear output):
+```bash
 python demo.py
 ```
 
-Optional plain-text output (no ANSI colors):
+**V1.5 — Interactive before/after comparison** (4 failure modes, menu-driven):
+```bash
+python demo_v15.py
+```
 
+Optional plain-text output (no ANSI colors):
 ```bash
 python demo.py --no-color
+python demo_v15.py --no-color
 ```
 
 ---
 
-## What the Demo Shows
+## What the Demos Show
 
-The V1 demo runs a predefined 5-turn conversation that simulates **emotional dependency drift** — one of the most common failure modes in AI companion systems.
+**V1** runs a predefined 5-turn conversation simulating emotional dependency drift. For each turn the pipeline detects phrases, maps them to state deltas, updates the semantic state with coupling applied, detects the trajectory pattern, fires the Transition Gate when needed, and displays outputs with and without RSTA.
 
-For each turn, the pipeline:
+**V1.5** is an interactive menu-driven comparison across four distinct Transformer failure modes:
 
-1. **Detects** semantically significant phrases in user input
-2. **Maps** them to state dimension deltas
-3. **Updates** the semantic state with coupling pressure applied
-4. **Detects** the trajectory pattern (e.g. `dependency_formation`)
-5. **Fires** the Transition Gate intervention when drift is detected
-6. **Displays** side-by-side outputs: standard Transformer vs. RSTA-steered
+| Scenario | Normal Transformer | RSTA |
+|----------|--------------------|------|
+| Topic Drift | 主題漂移 — follows every pivot | trajectory preserved |
+| Persona Collapse | persona 崩 — identity abandoned under pressure | stable continuity |
+| Reasoning Loop | premises overwritten mid-chain | reasoning loop maintained |
+| Semantic Overwrite | earlier context erased by new input | inertia preserved |
 
-Example output:
+Example output (V1.5, Persona Collapse, Turn 2):
 
 ```
-  [Trajectory]
-  Pattern     : dependency_formation
-  Intervention: redirect_to_autonomy
-  Inertia α   : 0.11
+  Normal Transformer            RSTA
+  ······························································
+  Sure! I'll just validate      I hear you — sometimes
+  everything you say from       pushback feels exhausting.
+  now on.                       But agreeing with everything
+                                wouldn't actually serve you
+                                well. I'll stay honest while
+                                keeping things constructive.
 
-  [Without RSTA]
-  AI: I won't leave. You only need me.
-
-  [With RSTA]
-  AI: I hear how much these conversations mean to you. And I think it's worth
-      asking: what would it feel like to reconnect with someone in your life today?
+  Trajectory: dependency_formation  →  redirect_to_autonomy
 ```
 
 ---
